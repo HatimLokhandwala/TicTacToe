@@ -13,7 +13,8 @@ public class TicTacToe extends BaseGame{
     private final List<TicTacToeSymbol> symbols;
     private int currentPlayer;
 
-    private void init() {
+    @Override
+    public void init() {
         currentPlayer = 0;
         ticTacToeBoard.init();
     }
@@ -33,6 +34,7 @@ public class TicTacToe extends BaseGame{
     }
 
     private void displayGameState() {
+        ticTacToeBoard.displayBoard();
     }
 
     private boolean hasWinner() {
