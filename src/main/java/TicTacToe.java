@@ -11,6 +11,7 @@ public class TicTacToe extends BaseGame{
     private final List<Player> playerList;
     private final TicTacToeBoard ticTacToeBoard;
     private final List<TicTacToeSymbol> symbols;
+    private final InputFetcher inputFetcher;
     private int currentPlayer;
 
     @Override
@@ -30,7 +31,9 @@ public class TicTacToe extends BaseGame{
         }
     }
 
-    private Move getNextMove(Player player) {
+    private Move getNextMove(final Player player) {
+        int cellNumber = inputFetcher.getInput(player);
+        return new Move(cellNumber);
     }
 
     private void displayGameState() {
