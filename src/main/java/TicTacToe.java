@@ -1,23 +1,38 @@
+import board.TicTacToeBoard;
+import board.TicTacToeSymbol;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Map;
 
 @Data
+@Builder
 public class TicTacToe extends BaseGame{
     private final List<Player> playerList;
-    private final Board board;
-    private final Map<BoardCharacter, Player> characterPlayerMap;
-    private int currentPlayer = 0;
+    private final TicTacToeBoard ticTacToeBoard;
+    private final List<TicTacToeSymbol> symbols;
+    private int currentPlayer;
 
-    void play() {
+    private void init() {
+        currentPlayer = 0;
+        ticTacToeBoard.init();
+    }
 
+    public void play() {
+        init();
+        System.out.println("===========Started Game=================");
         while(!hasWinner() && !hasTie()) {
             displayGameState();
             Player player = getNextPlayer();
             Move move = getNextMove(player);
             makeMove(move);
         }
+    }
+
+    private Move getNextMove(Player player) {
+    }
+
+    private void displayGameState() {
     }
 
     private boolean hasWinner() {
