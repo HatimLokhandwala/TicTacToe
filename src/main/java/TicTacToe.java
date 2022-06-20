@@ -2,6 +2,7 @@ import board.TicTacToeBoard;
 import board.TicTacToeSymbol;
 import lombok.Builder;
 import lombok.Data;
+import players.Player;
 
 import java.util.List;
 
@@ -29,6 +30,13 @@ public class TicTacToe extends BaseGame{
             Move move = getNextMove(player);
             makeMove(move);
         }
+        if (hasWinner()) {
+            Player winnerPlayer = getWinner();
+            System.out.println("players.Player "  + winnerPlayer.getName() + " is the winner");
+        }
+        if (hasTie()) {
+            System.out.println("Game is tied. No Winner!");
+        }
     }
 
     private Move getNextMove(final Player player) {
@@ -41,6 +49,10 @@ public class TicTacToe extends BaseGame{
     }
 
     private boolean hasWinner() {
+        TicTacToeSymbol currentSymbol = symbols.get(currentPlayer);
+        return ticTacToeBoard.isRowAcquired(currentSymbol)
+                && ticTacToeBoard.isColumnAcquired(currentSymbol)
+                && ticTacToeBoard.isDiagonalAcquired(currentSymbol);
     }
 
     private boolean hasTie() {

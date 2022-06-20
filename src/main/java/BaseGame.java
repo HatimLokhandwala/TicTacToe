@@ -1,3 +1,5 @@
+import players.Player;
+
 public abstract class BaseGame implements Game {
     public abstract void init();
     abstract Player getNextPlayer();

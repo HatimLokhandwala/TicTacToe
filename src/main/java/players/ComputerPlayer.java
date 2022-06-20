@@ -1,5 +1,7 @@
-public class ComputerPlayer extends Player{
-    ComputerPlayer() {
+package players;
+
+public class ComputerPlayer extends Player {
+    public ComputerPlayer() {
         this.name = "Computer";
     }
 

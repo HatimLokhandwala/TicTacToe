@@ -27,4 +27,53 @@ public class TicTacToeBoard {
             System.out.println("");
         }
     }
+
+    public boolean isRowAcquired(final TicTacToeSymbol symbol) {
+        for (int i = 0; i < size; i++) {
+            int count = 0;
+            for (int j = 0; j < size; j++) {
+                if (symbolBoard[i][j] == symbol) {
+                    count++;
+                }
+            }
+            if (count == size) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+     public boolean isColumnAcquired(final TicTacToeSymbol symbol) {
+        for (int j = 0; j < size; j++) {
+            int count = 0;
+            for (int i = 0; i < size; i++) {
+                if (symbolBoard[i][j] == symbol) {
+                    count++;
+                }
+            }
+            if (count == size) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isDiagonalAcquired(final TicTacToeSymbol symbol) {
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            if (symbolBoard[i][i] == symbol) {
+                count++;
+            }
+        }
+        if (count == size) {
+            return true;
+        }
+        count = 0;
+        for (int i = 0; i < size; i++) {
+            if (symbolBoard[i][size - i - 1] == symbol) {
+                count++;
+            }
+        }
+        return count == size;
+    }
 }
