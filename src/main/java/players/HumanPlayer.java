@@ -6,7 +6,7 @@ public class HumanPlayer extends Player {
     }
 
     @Override
-    String getName() {
+    public String getName() {
         return this.name;
     }
 }

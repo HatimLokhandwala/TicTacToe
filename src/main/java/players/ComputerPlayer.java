@@ -6,7 +6,7 @@ public class ComputerPlayer extends Player {
     }
 
     @Override
-    String getName() {
+    public String getName() {
         return name;
     }
 }

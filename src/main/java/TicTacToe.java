@@ -14,22 +14,26 @@ public class TicTacToe extends BaseGame{
     private final List<TicTacToeSymbol> symbols;
     private final InputFetcher inputFetcher;
     private int currentPlayer;
+    private static GameState GAME_STATE = GameState.NOT_STARTED;
 
     @Override
     public void init() {
-        currentPlayer = 0;
+        currentPlayer = -1;
         ticTacToeBoard.init();
+        GAME_STATE = GameState.STARTED;
     }
 
     public void play() {
-        init();
         System.out.println("===========Started Game=================");
+        init();
         while(!hasWinner() && !hasTie()) {
+            updateCurrentPlayer();
             displayGameState();
             Player player = getNextPlayer();
             Move move = getNextMove(player);
             makeMove(move);
         }
+        GAME_STATE = GameState.COMPLETED;
         if (hasWinner()) {
             Player winnerPlayer = getWinner();
             System.out.println("players.Player "  + winnerPlayer.getName() + " is the winner");
@@ -37,6 +41,10 @@ public class TicTacToe extends BaseGame{
         if (hasTie()) {
             System.out.println("Game is tied. No Winner!");
         }
+    }
+
+    private void updateCurrentPlayer() {
+        currentPlayer = (currentPlayer + 1) % playerList.size();
     }
 
     private Move getNextMove(final Player player) {
@@ -56,13 +64,12 @@ public class TicTacToe extends BaseGame{
     }
 
     private boolean hasTie() {
+        return false;
     }
 
     @Override
     Player getNextPlayer() {
-        final Player player = playerList.get(currentPlayer);
-        currentPlayer = 1 - currentPlayer;
-        return player;
+        return playerList.get(currentPlayer);
     }
 
     @Override
@@ -72,6 +79,9 @@ public class TicTacToe extends BaseGame{
 
     @Override
     Player getWinner() {
-        return null;
+        if (GAME_STATE != GameState.COMPLETED) {
+            throw new IllegalStateException("Game has not started or is being played currently");
+        }
+        return playerList.get(currentPlayer);
     }
 }
